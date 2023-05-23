@@ -3,8 +3,8 @@ import { IBook } from "./bookinterface";
 
 export const createBook = async (payload: IBook): Promise<IBook> => {
   const book = new Book(payload);
-  const result = await book.save();
-  return result;
+  await book.save();
+  return book;
 };
 
 export const getallKindsOfBook = async (): Promise<Array<IBook>> => {
@@ -25,33 +25,7 @@ export const getBookbyGenreAndPublisher = async (): Promise<Array<IBook>> => {
 };
 
 export const staticMethod = async (): Promise<Array<IBook>> => {
-  const books = await Book.aggregate([
-    { $match: { rating: { $gte: 4 } } },
-    {
-      $addFields: {
-        featuredbooks: {
-          $cond: {
-            if: {
-              $and: [{ $gt: ["$rating", 4.5] }],
-            },
-            then: { featured: "BestSeller" },
-            else: { featured: "Popular" },
-          },
-        },
-      },
-    },
-    {
-      $project: {
-        rating: true,
-        featuredbooks: true,
-      },
-    },
-    {
-      $sort: {
-        rating: -1,
-      },
-    },
-  ]);
+  const books = Book.getBooks();
 
   return books;
 };

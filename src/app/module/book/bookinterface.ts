@@ -1,9 +1,11 @@
+import { Model } from "mongoose";
+
 interface IReview {
   user: string;
   comment: string;
 }
 
-export type Price = string | number;
+type Price = string | number;
 
 export interface IBook {
   title: string;
@@ -17,4 +19,12 @@ export interface IBook {
     location: string;
   };
   reviews: Array<IReview>;
+}
+
+export interface IBookMethods {
+  fullTitle(): string;
+}
+
+export interface IBookModel extends Model<IBook, {}, IBookMethods> {
+  getBooks(): Array<IBook>;
 }
