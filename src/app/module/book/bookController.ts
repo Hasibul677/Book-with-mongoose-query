@@ -1,20 +1,19 @@
 import { NextFunction, Request, Response } from "express";
 import {
-  createBook,
-  getBookbyGenre,
-  getBookbyGenreAndPublisher,
-  getallKindsOfBook,
-  staticMethod,
-  updatePrice,
+  createNewBookInfo,
+  getBookSearchByGenre,
+  getBookSearchByGenreAndPublisher,
+  getMatchstaticMethod,
+  updatePriceStringToInt,
 } from "./bookService";
 
 // Task 1
-export const createBookController = async (
+export const createBookInfoController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const book = await createBook(req.body);
+  const book = await createNewBookInfo(req.body);
 
   res.status(201).json({
     message: "Successfully Book Information Created!",
@@ -22,27 +21,13 @@ export const createBookController = async (
   });
 };
 
-// get all method creating for checking the update value
-export const getAllBooksController = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const books = await getallKindsOfBook();
-
-  res.status(200).json({
-    message: "Successfully getting all books information",
-    books,
-  });
-};
-
 // Task 2:
-export const getBookgenreFantasysController = async (
+export const getBookSearchByGenreController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const books = await getBookbyGenre();
+  const books = await getBookSearchByGenre();
 
   res.status(200).json({
     message: "Successfully get all books information",
@@ -51,12 +36,12 @@ export const getBookgenreFantasysController = async (
 };
 
 // Task 3:
-export const getSciFiRoliBooksController = async (
+export const getBookSearchByGenreAndPublisherController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const books = await getBookbyGenreAndPublisher();
+  const books = await getBookSearchByGenreAndPublisher();
 
   res.status(200).json({
     message: "Successfully get all books information",
@@ -70,7 +55,7 @@ export const staticMehodController = async (
   res: Response,
   next: NextFunction
 ) => {
-  const books = await staticMethod();
+  const books = await getMatchstaticMethod();
 
   res.status(200).json({
     message: "Success",
@@ -84,7 +69,7 @@ export const updatePriceController = async (
   res: Response,
   next: NextFunction
 ) => {
-  const books = await updatePrice();
+  const books = await updatePriceStringToInt();
 
   res.status(200).json({
     message: "Success",

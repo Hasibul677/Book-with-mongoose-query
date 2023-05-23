@@ -1,19 +1,17 @@
 import express from "express";
 import {
-  createBookController,
-  getAllBooksController,
-  getBookgenreFantasysController,
-  getSciFiRoliBooksController,
+  createBookInfoController,
+  getBookSearchByGenreController,
+  getBookSearchByGenreAndPublisherController,
   staticMehodController,
   updatePriceController,
 } from "./bookController";
 
 const router = express();
 
-router.post("/create-book", createBookController);
-router.get("/get/all/books", getAllBooksController);
-router.get("/genre/Fantasy", getBookgenreFantasysController);
-router.get("/genre/Sci-Fi/published/Roli-Books", getSciFiRoliBooksController);
+router.post("/create-new-book", createBookInfoController);
+router.get("/searchby/genre/Fantasy", getBookSearchByGenreController);
+router.get("/searchby/genre/Sci-Fi/published/Roli-Books", getBookSearchByGenreAndPublisherController);
 router.get("/staticMethod", staticMehodController);
 router.put("/update/price-string-to-integer", updatePriceController);
 

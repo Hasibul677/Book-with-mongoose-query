@@ -5,15 +5,13 @@ interface IReview {
   comment: string;
 }
 
-type Price = string | number;
-
 export interface IBook {
   title: string;
   author: Array<string>;
   genre: string;
   publicationYear: number;
   rating: number;
-  price: Price;
+  price: string | number;
   publisher: {
     name: string;
     location: string;
@@ -22,9 +20,9 @@ export interface IBook {
 }
 
 export interface IBookMethods {
-  fullTitle(): string;
+  ratingInfo(): string;
 }
 
 export interface IBookModel extends Model<IBook, {}, IBookMethods> {
-  getBooks(): Array<IBook>;
+  getAllMatchedBook(): Array<IBook>;
 }

@@ -52,11 +52,11 @@ const bookSchema = new Schema<IBook, IBookModel, IBookMethods>({
   ],
 });
 
-bookSchema.method("fullTitle", function fullTitle() {
-  return this.title;
+bookSchema.method("ratingInfo", function ratingInfo() {
+  return this.rating;
 });
 
-bookSchema.static("getBooks", async function getBooks() {
+bookSchema.static("getAllMatchedBook", async function getAllMatchedBook() {
   const books = await this.aggregate([
     { $match: { rating: { $gte: 4 } } },
     {
